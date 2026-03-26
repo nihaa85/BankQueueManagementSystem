@@ -16,5 +16,7 @@ The application is built using Java. It leverages the Java Collections Framework
 Execution:
 
 To run the project, simply compile and execute the Java file:
+
 javac BankQueueSystem.java
+
 java BankQueueSystem
