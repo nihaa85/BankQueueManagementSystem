@@ -1,7 +1,7 @@
-
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.InputMismatchException; // Import for error handling
 
 public class BankQueueSystem {
 
@@ -9,7 +9,9 @@ public class BankQueueSystem {
 
         Queue<String> queue = new LinkedList<>();
         Scanner sc = new Scanner(System.in);
-        int choice;
+        int choice = 0;
+
+        System.out.println("Welcome to the Bank Queue Management System");
 
         do {
             System.out.println("\n--- Bank Queue Management System ---");
@@ -19,16 +21,28 @@ public class BankQueueSystem {
             System.out.println("4. Exit");
             System.out.print("Enter your choice: ");
 
-            choice = sc.nextInt();
-            sc.nextLine();
+            // Error Handling for non-integer input
+            try {
+                choice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a number (1-4).");
+                sc.nextLine(); // Clear the invalid input from scanner
+                continue; // Skip the rest of the loop and start over
+            }
 
             switch (choice) {
 
                 case 1:
                     System.out.print("Enter customer name: ");
                     String name = sc.nextLine();
-                    queue.add(name);
-                    System.out.println(name + " added to the queue.");
+                    // Validation to ensure name isn't empty
+                    if (name.trim().isEmpty()) {
+                        System.out.println("Customer name cannot be empty!");
+                    } else {
+                        queue.add(name);
+                        System.out.println(name + " added to the queue.");
+                    }
                     break;
 
                 case 2:
